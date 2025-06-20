@@ -54,10 +54,9 @@ function initializeLoginForm() {
             // For now, just show success message
             showSuccess('Login successful! Redirecting...');
             
-            // Simulate redirect after successful login
+            // Redirect to dashboard after successful login
             setTimeout(() => {
-                console.log('Would redirect to dashboard here');
-                // window.location.href = '/dashboard';
+                window.location.href = 'dashboard.html';
             }, 1500);
         }, 2000);
     });
