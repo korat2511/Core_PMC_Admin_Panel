@@ -9,9 +9,12 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     background-color: #f8f9fc;
     padding-top: var(--navbar-height);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 /* Top Navigation */
