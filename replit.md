@@ -71,7 +71,9 @@ CORE PMC is a pure frontend project for a construction project management admini
 
 ```
 Changelog:
-- June 20, 2025. Initial setup
+- June 20, 2025: Initial setup with login page
+- June 20, 2025: Added dashboard with construction-themed sidebar design
+- June 20, 2025: Fixed tagline from "HONEST" to "HONESTY"
 ```
 
 ## User Preferences
