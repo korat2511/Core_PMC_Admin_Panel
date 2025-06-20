@@ -2,7 +2,9 @@
 
 ## Overview
 
-CORE PMC is a pure frontend project for a construction project management administrative panel. The application is built with HTML5, CSS3, and JavaScript using Bootstrap 5 for responsive design. Inspired by Powerplay construction management software, it features construction-specific modules for project management, task tracking, material management, labor attendance, and reporting. Currently includes a login page and dashboard with CORE PMC branding and blue color scheme.
+CORE PMC is a pure frontend project for a construction project management administrative panel. The application is built with HTML5, CSS3, and JavaScript using Bootstrap 5 for responsive design. Inspired by Powerplay construction management software, it features construction-specific modules for project management, task tracking, material management, labor attendance, and reporting. Currently includes a login page and dashboard with CORE PMC branding and blue color scheme. 
+
+**IMPORTANT: This is frontend-only with no backend functionality - uses simple static file server for development.**
 
 ## System Architecture
 
