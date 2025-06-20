@@ -23,3 +23,17 @@ if __name__ == "__main__":
         print(f"Serving static files at http://0.0.0.0:{PORT}")
         print("CORE PMC Frontend - No backend functionality")
         httpd.serve_forever()
+
+# Flask app for Gunicorn compatibility (static file serving only)
+from flask import Flask, send_from_directory, send_file
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return send_file('index.html')
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('.', filename)
