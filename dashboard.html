@@ -58,59 +58,148 @@
         </div>
         <div class="offcanvas-body p-0">
             <div class="sidebar">
-                <div class="sidebar-header">
-                    <h6 class="text-uppercase fw-bold">MENU</h6>
+                <!-- Projects Section -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">PROJECTS</div>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-building"></i>
+                                    <span>Sites</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active d-flex align-items-center" href="dashboard.html">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-building"></i>
-                            <span>Sites</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-clipboard-list"></i>
-                            <span>Tasks</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-hard-hat"></i>
-                            <span>User</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-cubes"></i>
-                            <span>Material</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-wallet"></i>
-                            <span>Petty Cash</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-tools"></i>
-                            <span>Master</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
-                            <i class="fas fa-cogs"></i>
-                            <span>Other</span>
-                        </a>
-                    </li>
-                </ul>
+
+                <!-- Management Section -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">MANAGEMENT</div>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <span>Tasks</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-hard-hat"></i>
+                                    <span>User</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Petty Cash</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#material-menu" aria-expanded="false">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-cubes"></i>
+                                    <span>Material</span>
+                                </div>
+                                <i class="fas fa-chevron-down dropdown-arrow"></i>
+                            </a>
+                            <div class="collapse" id="material-menu">
+                                <ul class="nav nav-pills flex-column ms-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            <div class="nav-link-content">
+                                                <i class="fas fa-list"></i>
+                                                <span>View Materials</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            <div class="nav-link-content">
+                                                <i class="fas fa-plus"></i>
+                                                <span>Add Material</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Reports</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#master-menu" aria-expanded="false">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-tools"></i>
+                                    <span>Master</span>
+                                </div>
+                                <i class="fas fa-chevron-down dropdown-arrow"></i>
+                            </a>
+                            <div class="collapse" id="master-menu">
+                                <ul class="nav nav-pills flex-column ms-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            <div class="nav-link-content">
+                                                <i class="fas fa-cog"></i>
+                                                <span>Settings</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            <div class="nav-link-content">
+                                                <i class="fas fa-database"></i>
+                                                <span>Data Management</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- System Section -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">SYSTEM</div>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Other</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
