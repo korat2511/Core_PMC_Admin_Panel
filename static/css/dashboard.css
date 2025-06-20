@@ -149,6 +149,27 @@ body {
     color: #6c757d;
 }
 
+/* Sidebar Divider */
+.sidebar-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e3e6f0, transparent);
+    border: none;
+    margin: 1.5rem 1rem;
+}
+
+/* Badge styling */
+.sidebar .nav-link .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar .nav-link.active .badge {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: white;
+}
+
 /* Hover effect improvements */
 .sidebar .nav-link:hover i {
     transform: scale(1.1);
@@ -156,6 +177,21 @@ body {
 
 .sidebar .nav-link.active i {
     transform: scale(1.1);
+}
+
+/* Construction-specific icons styling */
+.sidebar .nav-link i.fa-building,
+.sidebar .nav-link i.fa-hard-hat,
+.sidebar .nav-link i.fa-boxes {
+    color: inherit;
+}
+
+/* Responsive badge adjustments */
+@media (max-width: 767.98px) {
+    .sidebar .nav-link .badge {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
+    }
 }
 
 /* Main Content */

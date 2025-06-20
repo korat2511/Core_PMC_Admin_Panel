@@ -2,7 +2,7 @@
 
 ## Overview
 
-CORE PMC is a pure frontend project for an administrative panel. The application is built with HTML5, CSS3, and JavaScript using Bootstrap 5 for responsive design. Currently features a login page with CORE PMC branding and blue color scheme matching the provided logo.
+CORE PMC is a pure frontend project for a construction project management administrative panel. The application is built with HTML5, CSS3, and JavaScript using Bootstrap 5 for responsive design. Inspired by Powerplay construction management software, it features construction-specific modules for project management, task tracking, material management, labor attendance, and reporting. Currently includes a login page and dashboard with CORE PMC branding and blue color scheme.
 
 ## System Architecture
 
@@ -29,17 +29,30 @@ CORE PMC is a pure frontend project for an administrative panel. The application
 
 ### UI Components
 - **Login Page**: Clean, centered login form with email and password fields
+- **Dashboard**: Construction project management overview with stats and quick actions
+- **Sidebar Navigation**: Modern design with construction-specific modules and notification badges
 - **Branding**: CORE PMC logo with blue color scheme matching provided logo
 - **Responsive Design**: Mobile-first approach with Bootstrap grid
 - **Form Validation**: Client-side validation with visual feedback
-- **Interactive Elements**: Password visibility toggle, form animations
+- **Interactive Elements**: Password visibility toggle, form animations, hover effects
 
-### Features
+### Construction Management Features
+- **Project Dashboard**: Overview of active projects, pending tasks, workers, and material orders
+- **Site Management**: Track multiple construction sites and their progress
+- **Task Management**: Assign and monitor construction tasks with status tracking
+- **Labor & Attendance**: Digital attendance tracking for construction workers
+- **Material Management**: Track material consumption, requests, and deliveries
+- **Bills & Purchase Orders**: Manage vendor bills, purchase orders, and GRNs
+- **Reports**: Generate daily project reports and labor reports
+- **Team Management**: Manage project team members and roles
+
+### Technical Features
 - **Email Validation**: Real-time email format validation
 - **Password Toggle**: Show/hide password functionality
 - **Form Feedback**: Loading states, success/error messages
 - **Responsive Layout**: Works on desktop, tablet, and mobile devices
 - **Accessibility**: Proper labels, focus states, and keyboard navigation
+- **Modern Sidebar**: Gradient backgrounds, smooth animations, and notification badges
 
 ## External Dependencies
 
