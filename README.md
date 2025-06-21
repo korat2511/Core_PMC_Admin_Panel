@@ -1,146 +1,108 @@
-# CORE PMC - Project Management System
+# Core Panel Manager - Admin Frontend
 
-A modern, responsive project management system built with HTML, CSS, and JavaScript. This is a frontend-only application designed for construction and project management companies.
+This repository contains the frontend for Core Panel Manager, a modern and responsive web application for managing construction projects. It is built with HTML, CSS, and JavaScript, utilizing the Bootstrap 5 framework for a clean and professional user interface.
 
-## 🚀 Features
+This is a **frontend-only prototype** and uses mock data for demonstration purposes. It is not connected to a live backend.
 
-- **Modern UI/UX**: Clean, professional design with Bootstrap 5
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Interactive Dashboard**: Real-time charts and statistics
-- **User Authentication**: Demo login system with localStorage
-- **Project Management**: Comprehensive project tracking interface
-- **Material Management**: Track materials and inventory
-- **Team Management**: User and team coordination tools
-- **Reporting**: Built-in reporting and analytics
+## ✨ Features
 
-## 🛠️ Technology Stack
+*   **Authentication**: Simple email/password login screen (mock authentication).
+*   **Interactive Dashboard**: A central hub with KPI cards, site progress charts, and statistics that can be filtered by a specific site.
+*   **Quick Actions**: Easily accessible buttons on the dashboard to create new sites or tasks.
+*   **Site Management**:
+    *   A dedicated "Sites" page to view all projects.
+    *   Search and filter functionality by status and date.
+    *   Grid and list view toggles.
+    *   Simple pagination for browsing sites.
+*   **Task Management**:
+    *   A comprehensive "Tasks" page with a powerful, searchable, and sortable table powered by **DataTables.js**.
+    *   Filtering by task status.
+    *   Links from dashboard statistics to pre-filtered task lists.
+*   **Task Profile**: A detailed view for each task, including progress bars, user assignments, a project timeline, and an image gallery.
+*   **User Management**:
+    *   A "Users" page to view all team members with pagination.
+    *   An attendance calendar modal to view user check-in/out data.
+    *   An interactive map (Leaflet.js) to show check-in locations relative to the site.
+*   **User Profile**: A detailed user profile page with an "Edit Profile" modal.
+*   **Create Site Page**: A dedicated form to create a new project site with details like name, client, dates, and multiple photo uploads with previews.
+*   **Responsive Design**: The entire application is built to be responsive and works across desktop, tablet, and mobile devices.
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **UI Framework**: Bootstrap 5
-- **Icons**: Font Awesome 6
-- **Charts**: Chart.js
-- **Fonts**: Google Fonts (Inter)
+## 🛠️ Tech Stack
 
-## 📋 Prerequisites
+*   **HTML5**
+*   **CSS3**
+*   **JavaScript (ES6+)**
+*   **Bootstrap 5**: Core UI framework.
+*   **Chart.js**: For interactive charts on the dashboard.
+*   **DataTables.js**: For advanced table features on the Tasks page.
+*   **Swiper.js**: For the image gallery on the Task Profile page.
+*   **Leaflet.js**: For the interactive map on the Users page.
+*   **Font Awesome**: For icons.
 
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- Node.js (optional, for development server)
-- Git (for cloning the repository)
+## 🚀 Getting Started
 
-## 🚀 Quick Start
+To run this project locally, you need a simple HTTP server to avoid CORS errors when loading local files.
 
-### Option 1: Simple HTTP Server (Recommended)
+### Prerequisites
 
-1. **Clone or download the project**
-   ```bash
-   git clone <repository-url>
-   cd CorePanelManager
-   ```
+*   [Node.js](https://nodejs.org/) and npm (for the local server).
 
-2. **Install dependencies** (if using Node.js)
-   ```bash
-   npm install
-   ```
+### Installation & Setup
 
-3. **Start the development server**
-   ```bash
-   npm start
-   # or
-   npm run dev
-   ```
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/korat2511/Cpre_PMC_Admin_Panel.git
+    cd Cpre_PMC_Admin_Panel
+    ```
 
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
+2.  **Install `http-server` globally** (if you don't have it):
+    ```bash
+    npm install -g http-server
+    ```
 
-### Option 2: Python HTTP Server
+3.  **Start the server:**
+    ```bash
+    http-server
+    ```
 
-If you have Python installed:
+4.  **Open your browser** and navigate to `http://127.0.0.1:8080` (or the URL provided by `http-server`).
 
-```bash
-# Python 3
-python -m http.server 3000
+### Demo Login
 
-# Python 2
-python -m SimpleHTTPServer 3000
-```
+*   **Email**: `admin@corepmc.com`
+*   **Password**: `admin123`
 
-Then open `http://localhost:3000` in your browser.
-
-### Option 3: Direct File Opening
-
-Simply open `index.html` in your web browser. However, some features may not work due to CORS restrictions.
-
-## 🔐 Demo Credentials
-
-Use these credentials to test the application:
-
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | `admin@corepmc.com` | `admin123` |
-
-## 📱 Application Structure
+## 📂 Project Structure
 
 ```
 CorePanelManager/
 ├── index.html              # Login page
 ├── dashboard.html          # Main dashboard
+├── sites.html              # All sites page
+├── create-site.html        # Create new site page
+├── tasks.html              # All tasks page
+├── task-profile.html       # Single task details page
+├── users.html              # All users page
+├── user-profile.html       # Single user details page
 ├── static/
-│   ├── css/
-│   │   ├── login.css       # Login page styles
-│   │   ├── dashboard.css   # Dashboard styles
-│   │   └── admin.css       # Admin styles
-│   └── js/
-│       ├── login.js        # Login functionality
-│       ├── dashboard.js    # Dashboard functionality
-│       └── admin.js        # Admin functionality
-├── attached_assets/        # Images and assets
-├── package.json           # Node.js dependencies
-└── README.md             # This file
+│   ├── css/                # All custom CSS files
+│   └── js/                 # All custom JavaScript files
+├── package.json            # Project dependencies
+└── README.md               # This file
 ```
 
-## 🎯 Key Features
+## 🖼️ Screenshots
 
-### Dashboard
-- **Project Overview**: Real-time project statistics
-- **Interactive Charts**: Progress tracking and analytics
-- **Quick Actions**: Fast access to common tasks
-- **Recent Activities**: Latest project updates
-- **Notifications**: Important alerts and reminders
+*(You can add screenshots of the application here. Below are some suggestions.)*
 
-### Navigation
-- **Responsive Sidebar**: Collapsible navigation menu
-- **Breadcrumb Navigation**: Easy page navigation
-- **Search Functionality**: Quick project and task search
+| Dashboard | Sites Page |
+| :---: | :---: |
+| `[Screenshot of Dashboard]` | `[Screenshot of Sites Page]` |
 
-### User Management
-- **Session Management**: Persistent login state
-- **User Profiles**: Individual user settings
-- **Role-based Access**: Different permission levels
+| Tasks Page | User Profile |
+| :---: | :---: |
+| `[Screenshot of Tasks Page]` | `[Screenshot of User Profile]` |
 
-## 🔧 Customization
-
-### Adding New Pages
-1. Create a new HTML file in the root directory
-2. Add corresponding CSS in `static/css/`
-3. Add JavaScript functionality in `static/js/`
-4. Update navigation links in the sidebar
-
-### Styling
-- Main color scheme is defined in CSS variables
-- Bootstrap 5 classes are used for layout and components
-- Custom styles are in the respective CSS files
-
-### Data
-- Currently uses mock data for demonstration
-- Can be easily connected to a backend API
-- localStorage is used for session management
-
-## 🌐 Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
 
 ## 📄 License
 
