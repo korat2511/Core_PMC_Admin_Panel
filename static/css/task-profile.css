@@ -1,0 +1,234 @@
+/* General Card Styles */
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Details Section */
+.card-body p {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.card-body p strong {
+    color: #555;
+    display: inline-block;
+    min-width: 120px;
+}
+
+/* Assigned Users */
+#task-assigned-users .user-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#task-assigned-users .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+#task-assigned-users .user-info .user-name {
+    font-weight: 600;
+    color: #333;
+}
+
+#task-assigned-users .user-info .user-role {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+
+/* Timeline */
+.timeline {
+    list-style: none;
+    padding: 0;
+    position: relative;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+    left: 21px;
+    margin-left: -1.5px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 45px;
+    margin-bottom: 20px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+
+.timeline-item:after, .timeline-item:before {
+    content: " ";
+    display: table;
+}
+
+.timeline-item:after {
+    clear: both;
+}
+
+.timeline-item .timeline-panel {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.timeline-item .timeline-badge {
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    font-size: 1.2em;
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    background-color: #999;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.timeline-badge.primary { background-color: #0d6efd !important; }
+.timeline-badge.success { background-color: #198754 !important; }
+.timeline-badge.info { background-color: #0dcaf0 !important; }
+.timeline-badge.warning { background-color: #ffc107 !important; }
+
+.timeline-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.timeline-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.timeline-body > p, .timeline-body > ul {
+    margin-bottom: 0;
+}
+
+.timeline-body > p + p {
+    margin-top: 5px;
+}
+.timeline-time {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Comments Section */
+.comment-item {
+    display: flex;
+    margin-bottom: 15px;
+}
+.comment-item:last-child {
+    margin-bottom: 0;
+}
+.comment-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.comment-content {
+    flex: 1;
+}
+.comment-header {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 2px;
+}
+.comment-header strong {
+    color: #343a40;
+}
+.comment-body {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/* Attachments Section */
+.attachment-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s ease-in-out;
+}
+.attachment-item:last-child {
+    border-bottom: none;
+}
+.attachment-item:hover {
+    background-color: #f8f9fa;
+}
+.attachment-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+    margin-right: 15px;
+    color: #0d6efd;
+}
+.attachment-details {
+    flex: 1;
+}
+.attachment-name {
+    font-weight: 600;
+    color: #333;
+}
+.attachment-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+
+/* Image Swiper */
+.image-swiper {
+    width: 100%;
+    height: 250px;
+    border-radius: 0.25rem;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 16px;
+} 

@@ -3,6 +3,11 @@
  * Handles login form interactions and validation
  */
 
+// Demo credentials for testing
+const DEMO_CREDENTIALS = {
+    'admin@corepmc.com': 'admin123'
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('CORE PMC Login Page initialized');
     
@@ -11,7 +16,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize password toggle
     initializePasswordToggle();
+    
+    // Check if user is already logged in
+    checkLoginStatus();
 });
+
+/**
+ * Check if user is already logged in
+ */
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('corepmc_logged_in');
+    const userEmail = localStorage.getItem('corepmc_user_email');
+    
+    if (isLoggedIn && userEmail) {
+        // User is already logged in, redirect to dashboard
+        window.location.href = 'dashboard.html';
+    }
+}
 
 /**
  * Initialize login form functionality
@@ -47,18 +68,30 @@ function initializeLoginForm() {
         // Show loading state
         showLoadingState(submitButton);
         
-        // Simulate login process (replace with actual login logic)
+        // Simulate login process
         setTimeout(() => {
             hideLoadingState(submitButton);
             
-            // For now, just show success message
+            // Check demo credentials
+            if (authenticateUser(email, password)) {
+                // Store login state
+                localStorage.setItem('corepmc_logged_in', 'true');
+                localStorage.setItem('corepmc_user_email', email);
+                localStorage.setItem('corepmc_login_time', new Date().toISOString());
+                
             showSuccess('Login successful! Redirecting...');
             
             // Redirect to dashboard after successful login
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 1500);
-        }, 2000);
+            } else {
+                showError('Invalid email or password. Please try again.');
+                
+                // Show demo credentials hint
+                showDemoCredentialsHint();
+            }
+        }, 1500);
     });
     
     // Real-time validation
@@ -74,9 +107,9 @@ function initializeLoginForm() {
     passwordInput.addEventListener('blur', function() {
         const password = this.value;
         if (!password) {
-            showFieldError(this, 'Password is required');
+            showFieldError(passwordInput, 'Password is required');
         } else {
-            clearFieldError(this);
+            clearFieldError(passwordInput);
         }
     });
     
@@ -88,6 +121,34 @@ function initializeLoginForm() {
     passwordInput.addEventListener('input', function() {
         clearFieldError(this);
     });
+}
+
+/**
+ * Authenticate user with demo credentials
+ */
+function authenticateUser(email, password) {
+    return DEMO_CREDENTIALS[email] === password;
+}
+
+/**
+ * Show demo credentials hint
+ */
+function showDemoCredentialsHint() {
+    const hintHtml = `
+        <div class="alert alert-info mt-3">
+            <h6><i class="fas fa-info-circle me-2"></i>Demo Credentials:</h6>
+            <small>
+                <strong>Admin:</strong> admin@corepmc.com / admin123
+            </small>
+        </div>
+    `;
+    
+    const loginCard = document.querySelector('.login-card');
+    const existingHint = loginCard.querySelector('.alert-info');
+    
+    if (!existingHint) {
+        loginCard.insertAdjacentHTML('beforeend', hintHtml);
+    }
 }
 
 /**

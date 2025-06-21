@@ -1,0 +1,22 @@
+{
+  "name": "core-pmc-frontend",
+  "version": "1.0.0",
+  "description": "CORE PMC - Project Management System Frontend",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -c-1",
+    "dev": "npx http-server . -p 3000 -c-1 --cors",
+    "build": "echo 'Frontend-only application - no build step required'"
+  },
+  "keywords": [
+    "project-management",
+    "frontend",
+    "dashboard",
+    "construction"
+  ],
+  "author": "CORE PMC",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 

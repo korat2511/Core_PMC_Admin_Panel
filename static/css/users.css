@@ -1,0 +1,166 @@
+.user-info-cell {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: 600;
+}
+
+.user-email {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.site-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    background-color: #0d6efd;
+    margin: 2px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.4em 0.6em;
+    font-size: 0.8em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50rem; /* pill shape */
+}
+
+.status-active {
+    background-color: #198754;
+}
+
+.status-inactive {
+    background-color: #dc3545;
+}
+
+.status-on-leave {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* Attendance Calendar */
+#calendar-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    min-height: 120px;
+    padding: 8px;
+    font-size: 0.9rem;
+    background-color: #fff;
+}
+
+.calendar-day.is-today {
+    border-color: #0d6efd;
+    background-color: #eef5ff;
+}
+
+.calendar-day.not-in-month {
+    background-color: #f8f9fa;
+    color: #ced4da;
+}
+
+.calendar-day.clickable {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.calendar-day.clickable:hover {
+    background-color: #e2e6ea;
+}
+
+.calendar-day.selected {
+    background-color: #cfe2ff;
+    border-color: #b6d4fe;
+}
+
+.day-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.calendar-day-name {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.attendance-entry {
+    font-size: 0.8rem;
+    padding: 4px;
+    border-radius: 4px;
+    margin-top: 5px;
+    background-color: #e9ecef;
+}
+
+.attendance-entry .time-label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.check-in {
+    color: #198754;
+}
+
+.check-out {
+    color: #dc3545;
+}
+
+.absent-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #6c757d;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#map-details-container {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 0.25rem;
+    height: 100%;
+}
+
+#location-info .info-item {
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+#location-info .at-site {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+#location-info .away-from-site {
+    background-color: #f8d7da;
+    color: #842029;
+} 

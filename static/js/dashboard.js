@@ -3,8 +3,32 @@
  * Handles dashboard interactions and UI enhancements
  */
 
+// Mock data for tasks
+const MOCK_TASKS = [
+    // Project Alpha: 100 tasks
+    ...Array(70).fill({ site: 'Project Alpha', status: 'Active' }),
+    ...Array(10).fill({ site: 'Project Alpha', status: 'Completed' }),
+    ...Array(15).fill({ site: 'Project Alpha', status: 'Pending' }),
+    ...Array(5).fill({ site: 'Project Alpha', status: 'Overdue' }),
+    // Project Beta: 80 tasks
+    ...Array(50).fill({ site: 'Project Beta', status: 'Active' }),
+    ...Array(5).fill({ site: 'Project Beta', status: 'Completed' }),
+    ...Array(20).fill({ site: 'Project Beta', status: 'Pending' }),
+    ...Array(5).fill({ site: 'Project Beta', status: 'Overdue' }),
+    // Project Gamma: 54 tasks
+    ...Array(36).fill({ site: 'Project Gamma', status: 'Active' }),
+    ...Array(6).fill({ site: 'Project Gamma', status: 'Completed' }),
+    ...Array(10).fill({ site: 'Project Gamma', status: 'Pending' }),
+    ...Array(2).fill({ site: 'Project Gamma', status: 'Overdue' }),
+];
+
+let taskDistributionChartInstance = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('CORE PMC Dashboard initialized');
+    
+    // Check authentication first
+    checkAuthentication();
     
     // Initialize sidebar functionality
     initializeSidebar();
@@ -14,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize dashboard features
     initializeDashboard();
+    
+    // Initialize charts with mock data
+    initializeCharts();
+    
+    // Initialize site filters
+    initializeSiteFilters();
 });
 
 /**
@@ -25,6 +55,9 @@ function initializeDashboard() {
     
     // Initialize quick action buttons
     initializeQuickActions();
+    
+    // Populate dashboard with mock data
+    populateDashboardData();
 }
 
 /**
@@ -37,7 +70,8 @@ function setCurrentDate() {
         const options = { 
             year: 'numeric', 
             month: 'long', 
-            day: 'numeric'
+            day: 'numeric',
+            weekday: 'long'
         };
         dateElement.textContent = now.toLocaleDateString('en-US', options);
     }
@@ -47,16 +81,21 @@ function setCurrentDate() {
  * Initialize quick action buttons
  */
 function initializeQuickActions() {
-    const quickActionButtons = document.querySelectorAll('.quick-action-card .btn');
+    const quickActionButtons = document.querySelectorAll('.quick-actions .btn');
     
     quickActionButtons.forEach(button => {
+        // Do not add the listener to the 'Create New Site' link
+        if (button.textContent.trim() === 'Create New Site') {
+            return;
+        }
+
         button.addEventListener('click', function(e) {
             e.preventDefault();
             const action = this.textContent.trim();
             
             // Add loading state
             const originalText = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Loading...';
+            this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
             this.disabled = true;
             
             // Simulate action (replace with actual functionality)
@@ -64,9 +103,9 @@ function initializeQuickActions() {
                 this.innerHTML = originalText;
                 this.disabled = false;
                 
-                // Show success message (you can customize this)
-                showNotification(`${action} clicked!`, 'info');
-            }, 1000);
+                // Show success message
+                showNotification(`${action} action initiated!`, 'success');
+            }, 1500);
         });
     });
 }
@@ -134,6 +173,63 @@ function initializeSidebar() {
             }
         });
     });
+    
+    // Handle logout
+    initializeLogout();
+}
+
+/**
+ * Initialize logout functionality
+ */
+function initializeLogout() {
+    const logoutLinks = document.querySelectorAll('a[href="index.html"]');
+    
+    logoutLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Clear login state
+            localStorage.removeItem('corepmc_logged_in');
+            localStorage.removeItem('corepmc_user_email');
+            localStorage.removeItem('corepmc_login_time');
+            
+            // Show logout message
+            showNotification('Logging out...', 'info');
+            
+            // Redirect to login page
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        });
+    });
+}
+
+/**
+ * Check authentication status
+ */
+function checkAuthentication() {
+    const isLoggedIn = localStorage.getItem('corepmc_logged_in');
+    const userEmail = localStorage.getItem('corepmc_user_email');
+    
+    if (!isLoggedIn || !userEmail) {
+        // User is not logged in, redirect to login page
+        window.location.href = 'index.html';
+        return;
+    }
+    
+    // Update user display name
+    updateUserDisplay(userEmail);
+}
+
+/**
+ * Update user display in the header
+ */
+function updateUserDisplay(email) {
+    const userDisplay = document.querySelector('.navbar-nav .nav-link');
+    if (userDisplay) {
+        const displayName = email.split('@')[0];
+        userDisplay.innerHTML = `<i class="fas fa-user-circle me-1"></i> ${displayName.charAt(0).toUpperCase() + displayName.slice(1)}`;
+    }
 }
 
 /**
@@ -187,9 +283,8 @@ function handleResponsiveLayout() {
  */
 function initializeCharts() {
     initializeSiteProgressChart();
-    initializeTaskDistributionChart();
+    taskDistributionChartInstance = initializeTaskDistributionChart(); // Store instance
     initializeMonthlyProgressChart();
-    initializeTeamPerformanceChart();
 }
 
 /**
@@ -202,14 +297,14 @@ function initializeSiteProgressChart() {
     new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Completed', 'In Progress', 'Pending', 'On Hold'],
+            labels: ['Active Sites', 'Completed', 'Pending', 'Overdue'],
             datasets: [{
-                data: [156, 89, 23, 11],
+                data: [32, 8, 3, 2],
                 backgroundColor: [
-                    '#10b981', // Green
-                    '#3b82f6', // Blue
-                    '#f59e0b', // Amber
-                    '#ef4444'  // Red
+                    '#28a745',
+                    '#17a2b8',
+                    '#ffc107',
+                    '#dc3545'
                 ],
                 borderWidth: 0,
                 cutout: '70%'
@@ -225,8 +320,7 @@ function initializeSiteProgressChart() {
                         padding: 20,
                         usePointStyle: true,
                         font: {
-                            size: 12,
-                            family: 'Inter'
+                            size: 11
                         }
                     }
                 },
@@ -247,45 +341,40 @@ function initializeSiteProgressChart() {
 }
 
 /**
- * Task Distribution Bar Chart
+ * Task Distribution Chart
  */
-function initializeTaskDistributionChart() {
+function initializeTaskDistributionChart(data = null) {
     const ctx = document.getElementById('taskDistributionChart');
-    if (!ctx) return;
+    if (!ctx) return null;
 
-    new Chart(ctx, {
+    const taskData = data || getTaskCounts('all');
+
+    const chartConfig = {
         type: 'bar',
         data: {
-            labels: ['Pending', 'Active', 'Overdue', 'Completed'],
+            labels: ['Active', 'Completed', 'Pending', 'Overdue'],
             datasets: [{
                 label: 'Tasks',
-                data: [623, 365, 47, 343],
+                data: [taskData.active, taskData.completed, taskData.pending, taskData.overdue],
                 backgroundColor: [
-                    '#f59e0b', // Amber
-                    '#3b82f6', // Blue
-                    '#ef4444', // Red
-                    '#10b981'  // Green
+                    'rgba(40, 167, 69, 0.8)',
+                    'rgba(23, 162, 184, 0.8)',
+                    'rgba(255, 193, 7, 0.8)',
+                    'rgba(220, 53, 69, 0.8)'
                 ],
-                borderRadius: 8,
-                borderSkipped: false,
+                borderColor: [
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(23, 162, 184, 1)',
+                    'rgba(255, 193, 7, 1)',
+                    'rgba(220, 53, 69, 1)'
+                ],
+                borderWidth: 1,
+                borderRadius: 6
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    titleFont: {
-                        family: 'Inter'
-                    },
-                    bodyFont: {
-                        family: 'Inter'
-                    }
-                }
-            },
             scales: {
                 y: {
                     beginAtZero: true,
@@ -293,28 +382,34 @@ function initializeTaskDistributionChart() {
                         color: '#f1f5f9'
                     },
                     ticks: {
-                        font: {
-                            family: 'Inter'
-                        }
+                        stepSize: 50
                     }
                 },
                 x: {
                     grid: {
                         display: false
+                    }
+                }
                     },
-                    ticks: {
-                        font: {
-                            family: 'Inter'
+            plugins: {
+                legend: {
+                    display: false
                         }
                     }
                 }
-            }
-        }
-    });
+    };
+    
+    if (taskDistributionChartInstance) {
+        taskDistributionChartInstance.data.datasets[0].data = [taskData.active, taskData.completed, taskData.pending, taskData.overdue];
+        taskDistributionChartInstance.update();
+        return taskDistributionChartInstance;
+    } else {
+        return new Chart(ctx, chartConfig);
+    }
 }
 
 /**
- * Monthly Progress Line Chart
+ * Monthly Progress Chart
  */
 function initializeMonthlyProgressChart() {
     const ctx = document.getElementById('monthlyProgressChart');
@@ -324,59 +419,45 @@ function initializeMonthlyProgressChart() {
         type: 'line',
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            datasets: [
-                {
-                    label: 'Completed Projects',
-                    data: [12, 19, 15, 25, 22, 30],
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            datasets: [{
+                label: 'Project Progress',
+                data: [15, 25, 35, 45, 60, 75],
+                borderColor: 'rgba(30, 90, 168, 1)',
+                backgroundColor: 'rgba(30, 90, 168, 0.1)',
+                borderWidth: 3,
                     fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Active Projects',
-                    data: [8, 12, 18, 15, 20, 25],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }
-            ]
+                tension: 0.4,
+                pointBackgroundColor: 'rgba(30, 90, 168, 1)',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 6
+            }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        usePointStyle: true,
-                        font: {
-                            family: 'Inter'
-                        }
-                    }
-                }
-            },
             scales: {
                 y: {
                     beginAtZero: true,
+                    max: 100,
                     grid: {
                         color: '#f1f5f9'
                     },
                     ticks: {
-                        font: {
-                            family: 'Inter'
+                        callback: function(value) {
+                            return value + '%';
                         }
                     }
                 },
                 x: {
                     grid: {
                         display: false
-                    },
-                    ticks: {
-                        font: {
-                            family: 'Inter'
-                        }
                     }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
                 }
             }
         }
@@ -384,58 +465,207 @@ function initializeMonthlyProgressChart() {
 }
 
 /**
- * Team Performance Radar Chart
+ * Populate dashboard with mock data
  */
-function initializeTeamPerformanceChart() {
-    const ctx = document.getElementById('teamPerformanceChart');
-    if (!ctx) return;
+function populateDashboardData() {
+    // Populate project statistics
+    populateProjectStats();
+    
+    // Populate recent activities
+    populateRecentActivities();
+    
+    // Populate notifications
+    populateNotifications();
+}
 
-    new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['Quality', 'Speed', 'Communication', 'Innovation', 'Teamwork'],
-            datasets: [{
-                label: 'Team Average',
-                data: [85, 92, 78, 88, 90],
-                borderColor: '#667eea',
-                backgroundColor: 'rgba(102, 126, 234, 0.2)',
-                pointBackgroundColor: '#667eea',
-                pointBorderColor: '#ffffff',
-                pointRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        font: {
-                            family: 'Inter'
-                        }
-                    }
-                }
-            },
-            scales: {
-                r: {
-                    beginAtZero: true,
-                    max: 100,
-                    grid: {
-                        color: '#f1f5f9'
-                    },
-                    pointLabels: {
-                        font: {
-                            family: 'Inter',
-                            size: 11
-                        }
-                    },
-                    ticks: {
-                        display: false
-                    }
-                }
-            }
+/**
+ * Populate project statistics
+ */
+function populateProjectStats() {
+    const stats = {
+        totalProjects: 24,
+        activeProjects: 18,
+        materialUsage: '75%',
+        teamMembers: 45
+    };
+
+    updateTaskStatistics(getTaskCounts('all'));
+    
+    // Update stats in the DOM
+    const elements = {
+        'totalProjects': document.getElementById('totalProjects'),
+        'activeProjects': document.getElementById('activeProjects'),
+        'materialUsage': document.getElementById('materialUsage'),
+        'teamMembers': document.getElementById('teamMembers'),
+    };
+    
+    Object.keys(elements).forEach(key => {
+        if (elements[key] && stats[key]) {
+            elements[key].textContent = stats[key];
         }
     });
+}
+
+/**
+ * Populate recent activities
+ */
+function populateRecentActivities() {
+    const activities = [
+        {
+            type: 'task',
+            message: 'Site inspection completed for Project Alpha',
+            time: '2 hours ago',
+            icon: 'fas fa-clipboard-check',
+            color: 'success'
+        },
+        {
+            type: 'material',
+            message: 'New material request approved',
+            time: '4 hours ago',
+            icon: 'fas fa-cubes',
+            color: 'info'
+        },
+        {
+            type: 'user',
+            message: 'New team member added to Project Beta',
+            time: '6 hours ago',
+            icon: 'fas fa-user-plus',
+            color: 'primary'
+        },
+        {
+            type: 'report',
+            message: 'Weekly progress report generated',
+            time: '1 day ago',
+            icon: 'fas fa-file-alt',
+            color: 'warning'
+        },
+        {
+            type: 'budget',
+            message: 'Budget update for Project Gamma',
+            time: '2 days ago',
+            icon: 'fas fa-dollar-sign',
+            color: 'success'
+        }
+    ];
+    
+    const activitiesContainer = document.getElementById('recentActivities');
+    if (activitiesContainer) {
+        activitiesContainer.innerHTML = activities.map(activity => `
+            <div class="activity-item">
+                <div class="activity-icon bg-${activity.color}">
+                    <i class="${activity.icon}"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-message">${activity.message}</div>
+                    <div class="activity-time">${activity.time}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+/**
+ * Populate notifications
+ */
+function populateNotifications() {
+    const notifications = [
+        {
+            type: 'warning',
+            message: 'Site safety inspection due tomorrow for Project Alpha',
+            time: '1 hour ago'
+        },
+        {
+            type: 'info',
+            message: 'New material delivery scheduled for Project Beta',
+            time: '3 hours ago'
+        },
+        {
+            type: 'success',
+            message: 'Project Gamma milestone achieved - Phase 1 completed',
+            time: '5 hours ago'
+        }
+    ];
+    
+    const notificationsContainer = document.getElementById('notifications');
+    if (notificationsContainer) {
+        notificationsContainer.innerHTML = notifications.map(notification => `
+            <div class="alert alert-${notification.type} alert-dismissible fade show">
+                ${notification.message}
+                <small class="text-muted d-block mt-1">${notification.time}</small>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        `).join('');
+    }
+}
+
+function initializeSiteFilters() {
+    // --- Task Distribution Chart Filter ---
+    const distCard = document.getElementById('task-distribution-card');
+    if (distCard) {
+        const distDropdownButton = distCard.querySelector('.site-filter-dropdown');
+        const distFilterItems = distCard.querySelectorAll('.site-filter-item');
+
+        distFilterItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                distDropdownButton.textContent = this.textContent;
+                distFilterItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                const selectedSite = this.dataset.site;
+                const counts = getTaskCounts(selectedSite);
+                initializeTaskDistributionChart(counts);
+            });
+        });
+    }
+
+    // --- Task Statistics Filter ---
+    const statsCard = document.getElementById('task-statistics-card');
+    if (statsCard) {
+        const statsDropdownButton = statsCard.querySelector('.site-filter-dropdown');
+        const statsFilterItems = statsCard.querySelectorAll('.site-filter-item');
+
+        statsFilterItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                statsDropdownButton.textContent = this.textContent;
+                statsFilterItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+
+                const selectedSite = this.dataset.site;
+                const counts = getTaskCounts(selectedSite);
+                updateTaskStatistics(counts);
+            });
+        });
+    }
+}
+
+function updateTaskStatistics(counts) {
+    document.getElementById('total-tasks').textContent = counts.total;
+    document.getElementById('active-tasks').textContent = counts.active;
+    document.getElementById('pending-tasks').textContent = counts.pending;
+    document.getElementById('overdue-tasks').textContent = counts.overdue;
+
+    // Update links
+    const statsCard = document.getElementById('task-statistics-card');
+    const siteFilter = statsCard.querySelector('.site-filter-item.active').dataset.site;
+    const siteParam = siteFilter === 'all' ? '' : `&site=${encodeURIComponent(siteFilter)}`;
+
+    document.getElementById('total-tasks-link').href = `tasks.html?status=all${siteParam}`;
+    document.getElementById('active-tasks-link').href = `tasks.html?status=Active${siteParam}`;
+    document.getElementById('pending-tasks-link').href = `tasks.html?status=Pending${siteParam}`;
+    document.getElementById('overdue-tasks-link').href = `tasks.html?status=Overdue${siteParam}`;
+}
+
+function getTaskCounts(site) {
+    const filteredTasks = site === 'all' ? MOCK_TASKS : MOCK_TASKS.filter(t => t.site === site);
+    return {
+        total: filteredTasks.length,
+        active: filteredTasks.filter(t => t.status === 'Active').length,
+        pending: filteredTasks.filter(t => t.status === 'Pending').length,
+        overdue: filteredTasks.filter(t => t.status === 'Overdue').length,
+        completed: filteredTasks.filter(t => t.status === 'Completed').length,
+    };
 }
 
 // Export functions for global use
