@@ -247,4 +247,18 @@
         margin-top: 1rem;
         justify-content: flex-end;
     }
+}
+
+.toolbar-card .form-control, .toolbar-card .btn {
+    height: 100%;
+}
+
+@media (max-width: 1199.98px) {
+    .toolbar-card .d-flex {
+        justify-content: flex-start !important;
+    }
+
+    .toolbar-card .ms-xl-2 {
+        margin-left: 0 !important;
+    }
 } 

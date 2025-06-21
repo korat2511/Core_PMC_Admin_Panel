@@ -1,0 +1,81 @@
+/* static/css/site-report.css */
+
+.duration-btn {
+    min-width: 100px;
+}
+
+.list-group-item .form-check-input {
+    margin-left: .5rem;
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+#site-report-form .list-group-item {
+    border-left: none;
+    border-right: none;
+}
+#site-report-form .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+}
+#site-report-form .list-group-item:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.sub-options-list {
+    background-color: #f8f9fa;
+    border-radius: .25rem;
+    padding: 1rem 1rem .25rem 1rem;
+    margin-top: .5rem;
+    border-left: 3px solid #0d6efd;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+.sub-options-list .form-check {
+    margin-bottom: 0.75rem;
+}
+
+.sub-options-list .form-check-label {
+    margin-left: 0.5rem;
+}
+
+.report-item-container .report-item-text {
+    flex-grow: 1;
+}
+
+.report-part-toggle {
+    cursor: pointer;
+}
+
+.date-picker-input {
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+}
+
+.list-group {
+    border: none;
+}
+
+#report-parts-list .list-group-item {
+    background-color: transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1.25rem 0;
+    border-radius: 0 !important;
+}
+
+#report-parts-list .list-group-item:last-child {
+    border-bottom: none;
+} 

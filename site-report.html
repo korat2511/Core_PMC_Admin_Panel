@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Report - Core PMC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="static/css/dashboard.css" rel="stylesheet">
+    <link href="static/css/site-report.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
+                <div class="logo-container me-3">
+                    <div class="logo-text"><span class="core-text">CORE</span><span class="pmc-text">PMC</span></div>
+                    <div class="tagline">INTEGRITY | TRANSPARENCY | HONESTY</div>
+                </div>
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar"><span class="navbar-toggler-icon"></span></button>
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-user-circle me-1"></i> Admin</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="user-profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="offcanvas-lg offcanvas-start bg-primary text-white" id="sidebar" data-bs-scroll="true" data-bs-backdrop="false">
+        <div class="offcanvas-header d-lg-none"><h5 class="offcanvas-title">Menu</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar"></button></div>
+        <div class="offcanvas-body p-0">
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">PROJECTS</div>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item"><a class="nav-link" href="dashboard.html"><div class="nav-link-content"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div></a></li>
+                        <li class="nav-item"><a class="nav-link" href="sites.html"><div class="nav-link-content"><i class="fas fa-building"></i><span>Sites</span></div></a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">MANAGEMENT</div>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item"><a class="nav-link" href="tasks.html"><div class="nav-link-content"><i class="fas fa-tasks"></i><span>Tasks</span></div></a></li>
+                        <li class="nav-item"><a class="nav-link" href="users.html"><div class="nav-link-content"><i class="fas fa-hard-hat"></i><span>User</span></div></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><div class="nav-link-content"><i class="fas fa-wallet"></i><span>Petty Cash</span></div></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#material-menu"><div class="nav-link-content"><i class="fas fa-cubes"></i><span>Material</span></div><i class="fas fa-chevron-down dropdown-arrow"></i></a><div class="collapse" id="material-menu"><ul class="nav nav-pills flex-column ms-3"></ul></div></li>
+                        <li class="nav-item"><a class="nav-link active" href="reports.html"><div class="nav-link-content"><i class="fas fa-file-alt"></i><span>Reports</span></div></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#master-menu"><div class="nav-link-content"><i class="fas fa-tools"></i><span>Master</span></div><i class="fas fa-chevron-down dropdown-arrow"></i></a><div class="collapse" id="master-menu"><ul class="nav nav-pills flex-column ms-3"></ul></div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="page-header d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h2 mb-1 text-primary"><i class="fas fa-clipboard-list me-2"></i>Site Report</h1>
+                    <p class="text-muted mb-0">Customize and generate a detailed site report.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body p-4">
+                    <form id="site-report-form">
+                        <!-- Site Selection -->
+                        <div class="mb-4">
+                            <label for="site-select" class="form-label fs-5">Select Site</label>
+                            <select class="form-select form-select-lg" id="site-select">
+                                <option selected>Choose a site...</option>
+                                <option value="alpha">Project Alpha</option>
+                                <option value="beta">Project Beta</option>
+                                <option value="gamma">Project Gamma</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Duration Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fs-5">Select duration</label>
+                            <div class="duration-buttons d-flex flex-wrap gap-2">
+                                <button type="button" class="btn btn-primary duration-btn active" data-duration="today">Today</button>
+                                <button type="button" class="btn btn-outline-secondary duration-btn" data-duration="yesterday">Yesterday</button>
+                                <button type="button" class="btn btn-outline-secondary duration-btn" data-duration="7days">7 Days</button>
+                                <button type="button" class="btn btn-outline-secondary duration-btn" data-duration="15days">15 Days</button>
+                                <button type="button" class="btn btn-outline-secondary duration-btn" data-duration="specific">Specific Date</button>
+                            </div>
+                        </div>
+
+                        <!-- Date Range -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="from-date" class="form-label">FROM</label>
+                                <input type="date" id="from-date" class="form-control" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="to-date" class="form-label">TO</label>
+                                <input type="date" id="to-date" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <!-- Parts in the Report -->
+                        <div class="mb-4">
+                             <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Parts in the Report</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="select-all-parts" checked>
+                                    <label class="form-check-label" for="select-all-parts">Select All</label>
+                                </div>
+                            </div>
+                            <ul class="list-group" id="report-parts-list">
+                                <!-- Progress -->
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-part-toggle report-item-container" data-bs-toggle="collapse" href="#progress-options">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Progress</h6>
+                                            <p class="mb-0 text-muted small">Includes task progress</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="progress" data-bs-target="#progress-options" checked>
+                                    </div>
+                                    <div class="collapse sub-options-list" id="progress-options">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="pending" checked><label class="form-check-label">Pending</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="active" checked><label class="form-check-label">Active</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="complete" checked><label class="form-check-label">Complete</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="overdue" checked><label class="form-check-label">Overdue</label></div>
+                                    </div>
+                                </li>
+                                <!-- Category -->
+                                <li class="list-group-item">
+                                     <div class="d-flex justify-content-between align-items-center report-item-container">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Category</h6>
+                                            <p class="mb-0 text-muted small">Includes task categories</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="category" checked>
+                                    </div>
+                                </li>
+                                <!-- Users -->
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-part-toggle report-item-container" data-bs-toggle="collapse" href="#users-options">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Users</h6>
+                                            <p class="mb-0 text-muted small">Includes assign users</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="users" data-bs-target="#users-options" checked>
+                                    </div>
+                                    <div class="collapse sub-options-list" id="users-options">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="pratik" checked><label class="form-check-label">Pratik Patel</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="rutvik" checked><label class="form-check-label">Rutvik Korat</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="jatin" checked><label class="form-check-label">Jatin Ghelani</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="nisarg" checked><label class="form-check-label">Nisarg Khunt</label></div>
+                                    </div>
+                                </li>
+                                <!-- Decision -->
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-part-toggle report-item-container" data-bs-toggle="collapse" href="#decision-options">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Decision</h6>
+                                            <p class="mb-0 text-muted small">Includes all decisions</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="decision" data-bs-target="#decision-options" checked>
+                                    </div>
+                                    <div class="collapse sub-options-list" id="decision-options">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="pmc" checked><label class="form-check-label">PMC</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="client" checked><label class="form-check-label">Client</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="architect" checked><label class="form-check-label">Architect</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="vendor" checked><label class="form-check-label">Vendor</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="structure" checked><label class="form-check-label">Structure</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="other" checked><label class="form-check-label">Other</label></div>
+                                    </div>
+                                </li>
+                                <!-- Drawing -->
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-part-toggle report-item-container" data-bs-toggle="collapse" href="#drawing-options">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Drawing</h6>
+                                            <p class="mb-0 text-muted small">Includes all drawings</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="drawing" data-bs-target="#drawing-options" checked>
+                                    </div>
+                                    <div class="collapse sub-options-list" id="drawing-options">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="architect" checked><label class="form-check-label">Architect</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="structure" checked><label class="form-check-label">Structure</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="other" checked><label class="form-check-label">Other</label></div>
+                                    </div>
+                                </li>
+                                <!-- Quotation -->
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-part-toggle report-item-container" data-bs-toggle="collapse" href="#quotation-options">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Quotation</h6>
+                                            <p class="mb-0 text-muted small">Includes all quotation</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="quotation" data-bs-target="#quotation-options" checked>
+                                    </div>
+                                     <div class="collapse sub-options-list" id="quotation-options">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="pmc" checked><label class="form-check-label">PMC</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="client" checked><label class="form-check-label">Client</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="architect" checked><label class="form-check-label">Architect</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="vendor" checked><label class="form-check-label">Vendor</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="structure" checked><label class="form-check-label">Structure</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="other" checked><label class="form-check-label">Other</label></div>
+                                    </div>
+                                </li>
+                                <!-- Selection -->
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-part-toggle report-item-container" data-bs-toggle="collapse" href="#selection-options">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Selection</h6>
+                                            <p class="mb-0 text-muted small">Includes all selections</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="selection" data-bs-target="#selection-options" checked>
+                                    </div>
+                                    <div class="collapse sub-options-list" id="selection-options">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="architect" checked><label class="form-check-label">Architect</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" value="client" checked><label class="form-check-label">Client</label></div>
+                                    </div>
+                                </li>
+                                <!-- Other items without sub-options -->
+                                <li class="list-group-item">
+                                     <div class="d-flex justify-content-between align-items-center report-item-container">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Work Updates</h6>
+                                            <p class="mb-0 text-muted small">Includes all work updates</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="work_updates" checked>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                     <div class="d-flex justify-content-between align-items-center report-item-container">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Material</h6>
+                                            <p class="mb-0 text-muted small">Includes material requirements</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="material" checked>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                     <div class="d-flex justify-content-between align-items-center report-item-container">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Survey</h6>
+                                            <p class="mb-0 text-muted small">Includes site survey</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="survey" checked>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-item-container">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Manpower</h6>
+                                            <p class="mb-0 text-muted small">Includes all manpower</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="manpower" checked>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center report-item-container">
+                                        <div class="report-item-text">
+                                            <h6 class="mb-0">Attachment</h6>
+                                            <p class="mb-0 text-muted small">Includes all attachment</p>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" value="attachment" checked>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Generate Report</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/site-report.js"></script>
+</body>
+</html> 
