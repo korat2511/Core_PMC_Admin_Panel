@@ -91,18 +91,6 @@ CorePanelManager/
 └── README.md               # This file
 ```
 
-## 🖼️ Screenshots
-
-*(You can add screenshots of the application here. Below are some suggestions.)*
-
-| Dashboard | Sites Page |
-| :---: | :---: |
-| `[Screenshot of Dashboard]` | `[Screenshot of Sites Page]` |
-
-| Tasks Page | User Profile |
-| :---: | :---: |
-| `[Screenshot of Tasks Page]` | `[Screenshot of User Profile]` |
-
 
 ## 📄 License
 
